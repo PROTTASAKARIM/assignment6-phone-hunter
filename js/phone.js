@@ -1,5 +1,8 @@
 document.getElementById('no-phone-found').style.display = 'none';
 document.getElementById('loading-spinner').style.display = 'none';
+document.getElementById('display-all').style.display = 'none';
+
+
 const toggleSpinner = displayStyle => {
     document.getElementById('loading-spinner').style.display = displayStyle;
 }
@@ -30,6 +33,7 @@ const searchPhone = () => {
     }
 }
 
+
 const showPhones = phones => {
 
     const searchResultShow = document.getElementById('search-result');
@@ -40,24 +44,72 @@ const showPhones = phones => {
         noPhoneFound('block');
     }
     else {
-        noPhoneFound('none');
-        phones.forEach(phone => {
-            const div = document.createElement('div');
-            div.classList.add('col');
-            div.innerHTML = `
-                <div class="card" style="width: 18rem;">
-                    <img src="${phone.image}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">${phone.phone_name}</h5>
-                            <p class="card-text">${phone.brand}</p>
-                            <a href="#top"><button onclick="getPhone('${phone.slug}')" type="button" class="btn btn-primary">Show Details</button></a>
-                            
-                        </div>
-                </div>
-                `
-            searchResultShow.appendChild(div)
 
-        });
+        if (phones.length > 20) {
+            const slicePhones = phones.slice(0, 20);
+            slicePhones?.forEach(phone => {
+                const div = document.createElement('div');
+                div.classList.add('col');
+                div.innerHTML = `
+                    <div class="card" style="width: 18rem;">
+                        <img src="${phone.image}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">${phone.phone_name}</h5>
+                                <p class="card-text">${phone.brand}</p>
+                                <a href="#top"><button onclick="getPhone('${phone.slug}')" type="button" class="btn btn-primary">Show Details</button></a>
+                                
+                            </div>
+                    </div>
+                   
+                    `
+                searchResultShow.appendChild(div)
+            })
+            document.getElementById('display-all').style.display = 'block';
+            document.getElementById('display-all').addEventListener('click', function () {
+                document.getElementById('display-all').style.display = 'none';
+                const restPhones = phones.slice(20);
+                restPhones?.forEach(phone => {
+                    const div = document.createElement('div');
+                    div.classList.add('col');
+                    div.innerHTML = `
+                        <div class="card" style="width: 18rem;">
+                            <img src="${phone.image}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">${phone.phone_name}</h5>
+                                    <p class="card-text">${phone.brand}</p>
+                                    <a href="#top"><button onclick="getPhone('${phone.slug}')" type="button" class="btn btn-primary">Show Details</button></a>
+                                    
+                                </div>
+                        </div>
+                       
+                        `
+                    searchResultShow.appendChild(div)
+                })
+            })
+
+
+        } else {
+            noPhoneFound('none');
+            phones.forEach(phone => {
+                const div = document.createElement('div');
+                div.classList.add('col');
+                div.innerHTML = `
+                    <div class="card" style="width: 18rem;">
+                        <img src="${phone.image}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">${phone.phone_name}</h5>
+                                <p class="card-text">${phone.brand}</p>
+                                <a href="#top"><button onclick="getPhone('${phone.slug}')" type="button" class="btn btn-primary">Show Details</button></a>
+                                
+                            </div>
+                    </div>
+                    `
+                searchResultShow.appendChild(div)
+
+            });
+        }
+
+
     }
     toggleSpinner('none')
 }
@@ -95,6 +147,7 @@ const showPhoneDetils = phone => {
 
             </div>
     </div>
+    
     `
     phoneDetails.appendChild(div);
 }
