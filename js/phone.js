@@ -1,40 +1,65 @@
+document.getElementById('no-phone-found').style.display = 'none';
+document.getElementById('loading-spinner').style.display = 'none';
+const toggleSpinner = displayStyle => {
+    document.getElementById('loading-spinner').style.display = displayStyle;
+}
+const noPhoneFound = displayStyle => {
+    document.getElementById('no-phone-found').style.display = displayStyle;
+}
+
 const searchPhone = () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
-    // console.log(searchText);
-    // searchField.value = '';
-    // console.log(searchField);
-    const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
-    fetch(url)
-        .then(res => res.json())
-        .then(data => showPhones(data.data))
+    searchField.value = '';
+    toggleSpinner('block')
+    noPhoneFound('none');
+    if (searchText == '') {
+        noPhoneFound('block');
+        toggleSpinner('none');
+        const searchResultShow = document.getElementById('search-result');
+        searchResultShow.textContent = '';
+        const phoneDetails = document.getElementById('show-phone-details');
+        phoneDetails.textContent = '';
+
+    } else {
+        const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => showPhones(data.data))
+
+    }
 }
+
 const showPhones = phones => {
-    // console.log(phones);
-    // for (const phone of phones) {
-    //     console.log(phone)
-    // }
+
     const searchResultShow = document.getElementById('search-result');
     searchResultShow.textContent = '';
     const phoneDetails = document.getElementById('show-phone-details');
     phoneDetails.textContent = '';
-    phones.forEach(phone => {
-
-        // 
-        const div = document.createElement('div');
-        div.classList.add('col');
-        div.innerHTML = `
-        <div class="card" style="width: 18rem;">
-            <img src="${phone.image}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">${phone.phone_name}</h5>
-                    <p class="card-text">${phone.brand}</p>
-                    <button onclick="getPhone('${phone.slug}')" type="button" class="btn btn-primary">Show Details</button>
+    if (phones.length == 0) {
+        noPhoneFound('block');
+    }
+    else {
+        noPhoneFound('none');
+        phones.forEach(phone => {
+            const div = document.createElement('div');
+            div.classList.add('col');
+            div.innerHTML = `
+                <div class="card" style="width: 18rem;">
+                    <img src="${phone.image}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${phone.phone_name}</h5>
+                            <p class="card-text">${phone.brand}</p>
+                            <a href="#top"><button onclick="getPhone('${phone.slug}')" type="button" class="btn btn-primary">Show Details</button></a>
+                            
+                        </div>
                 </div>
-        </div>
-        `
-        searchResultShow.appendChild(div)
-    });
+                `
+            searchResultShow.appendChild(div)
+
+        });
+    }
+    toggleSpinner('none')
 }
 const getPhone = phone => {
     const url = `https://openapi.programming-hero.com/api/phone/${phone}`;
@@ -43,13 +68,13 @@ const getPhone = phone => {
         .then(data => showPhoneDetils(data.data))
 }
 const showPhoneDetils = phone => {
-    console.log(phone)
+    // console.log(phone)
     const phoneDetails = document.getElementById('show-phone-details');
     phoneDetails.textContent = '';
     const div = document.createElement('div');
     div.innerHTML = `
-    <div class="card" style="width: 18rem;">
-        <img src="${phone.image}" class="card-img-top" alt="...">
+    <div class="card m-2" style="width: 100%;">
+        <img src="${phone.image}" class="card-img-top w-75 mx-auto" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Phone Name : ${phone.name}</h5>
                 <p class="card-text">Phone Brand : ${phone.brand}</p>
@@ -60,13 +85,13 @@ const showPhoneDetils = phone => {
                 <p class="card-text">Phone sensors : ${phone.mainFeatures.sensors}</p>
                 <p class="card-text">Phone storage : ${phone.mainFeatures.storage}</p>
                 <p class="card-text">Others : </p>
-                <p class="card-text">Phone storage : ${phone.others.Bluetooth}</p>
-                <p class="card-text">Phone storage : ${phone.others.GPS}</p>
-                <p class="card-text">Phone storage : ${phone.others.NFC}</p>
+                <p class="card-text">Phone Bluetooth : ${phone.others.Bluetooth}</p>
+                <p class="card-text">Phone GPS : ${phone.others.GPS}</p>
+                <p class="card-text">Phone NFC : ${phone.others.NFC}</p>
                 <p class="card-text">Phone storage : ${phone.others.Radio}</p>
-                <p class="card-text">Phone storage : ${phone.others.USB}</p>
-                <p class="card-text">Phone storage : ${phone.others.WLAN}</p>
-                <p class="card-text">Phone storage : ${phone.releaseDate ? phone.releaseDate : "No release date is found"}</p>
+                <p class="card-text">Phone Radio : ${phone.others.USB}</p>
+                <p class="card-text">Phone WLAN : ${phone.others.WLAN}</p>
+                <p class="card-text">Phone Release Date : ${phone.releaseDate ? phone.releaseDate : "No release date is found"}</p>
 
             </div>
     </div>

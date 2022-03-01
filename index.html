@@ -17,20 +17,25 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">phoneJungle</a>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="d-flex ms-auto">
-                        <input id="search-field" class="form-control me-2" type="text" placeholder="Search"
-                            aria-label="Search">
-                        <button onclick="searchPhone()" class="btn btn-outline-success" type="button">Search</button>
-                    </form>
-                </div>
+                <form class="d-flex ms-auto">
+                    <input id="search-field" class="form-control me-2" type="text" placeholder="Search"
+                        aria-label="Search">
+                    <button onclick="searchPhone()" class="btn btn-outline-success" type="button">Search</button>
+                </form>
             </div>
         </nav>
     </header>
     <main>
         <section>
+            <div id="no-phone-found" class="text-warning">
+                <h1>No Phone found</h1>
+            </div>
+            <div id="loading-spinner">
+                <h2>Loading.....</h2>
+            </div>
+        </section>
+        <section>
             <div id="show-phone-details" class="w-50 mx-auto">
-
             </div>
             <div class="container m-3">
                 <div id="search-result" class="row row-cols-1 row-cols-md-3 g-5">
