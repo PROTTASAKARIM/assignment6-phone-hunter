@@ -82,10 +82,15 @@ const showPhones = phones => {
             })
             document.getElementById('display-all').style.display = 'block';
             document.getElementById('display-all').addEventListener('click', function () {
-                document.getElementById('display-all').style.display = 'none';
+
                 //display after top 20 data
-                const restPhones = phones.slice(20);
-                restPhones?.forEach(phone => {
+                document.getElementById('display-all').style.display = 'none';
+                const searchResultShow = document.getElementById('search-result');
+                searchResultShow.textContent = '';
+
+
+
+                phones?.forEach(phone => {
                     const div = document.createElement('div');
                     div.classList.add('col');
                     div.innerHTML = `
