@@ -58,6 +58,7 @@ const showPhones = phones => {
     //if no data is found
     if (phones.length == 0) {
         noPhoneFound('block');
+        showAllbutton('none');
     }
     else {
         //display top 20 data
@@ -81,6 +82,7 @@ const showPhones = phones => {
                 searchResultShow.appendChild(div)
             })
             document.getElementById('display-all').style.display = 'block';
+            //show all button
             document.getElementById('display-all').addEventListener('click', function () {
 
                 //display after top 20 data
