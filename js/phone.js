@@ -5,27 +5,35 @@ document.getElementById('display-all').style.display = 'none';
 
 
 const toggleSpinner = displayStyle => {
+    //loading display
     document.getElementById('loading-spinner').style.display = displayStyle;
 }
 const noPhoneFound = displayStyle => {
+    //no phn found display
     document.getElementById('no-phone-found').style.display = displayStyle;
 }
 const showAllbutton = displayStyle => {
+    //display all button
     document.getElementById('display-all').style.display = displayStyle;
 }
 
 const searchPhone = () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
+    //convert search text to lower case
     const lowerCaseSearchText = searchText.toLowerCase();
     searchField.value = '';
+
     toggleSpinner('block')
     noPhoneFound('none');
     document.getElementById('header-name').style.display = 'none';
+
     if (searchText == '') {
+
         noPhoneFound('block');
         toggleSpinner('none');
         showAllbutton('none');
+
         const searchResultShow = document.getElementById('search-result');
         searchResultShow.textContent = '';
         const phoneDetails = document.getElementById('show-phone-details');
@@ -47,11 +55,12 @@ const showPhones = phones => {
     searchResultShow.textContent = '';
     const phoneDetails = document.getElementById('show-phone-details');
     phoneDetails.textContent = '';
+    //if no data is found
     if (phones.length == 0) {
         noPhoneFound('block');
     }
     else {
-
+        //display top 20 data
         if (phones.length > 20) {
             const slicePhones = phones.slice(0, 20);
             slicePhones?.forEach(phone => {
@@ -74,6 +83,7 @@ const showPhones = phones => {
             document.getElementById('display-all').style.display = 'block';
             document.getElementById('display-all').addEventListener('click', function () {
                 document.getElementById('display-all').style.display = 'none';
+                //display after top 20 data
                 const restPhones = phones.slice(20);
                 restPhones?.forEach(phone => {
                     const div = document.createElement('div');
@@ -96,6 +106,7 @@ const showPhones = phones => {
 
 
         } else {
+            //if phones are less then 20
             noPhoneFound('none');
             phones.forEach(phone => {
                 const div = document.createElement('div');
@@ -127,7 +138,7 @@ const getPhone = phone => {
         .then(data => showPhoneDetils(data.data))
 }
 const showPhoneDetils = phone => {
-    // console.log(phone)
+    //if others data is present 
     const phoneDetails = document.getElementById('show-phone-details');
     phoneDetails.textContent = '';
     if (phone.others) {
@@ -159,6 +170,7 @@ const showPhoneDetils = phone => {
         `
         phoneDetails.appendChild(div);
     } else {
+        //there is no sensor and others data 
         const div = document.createElement('div');
         div.innerHTML = `
     <div class="card m-2" style="width: 100%;">
