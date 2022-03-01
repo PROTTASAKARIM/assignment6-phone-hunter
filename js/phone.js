@@ -70,8 +70,8 @@ const showPhones = phones => {
                     <div class="card" style="width: 18rem;">
                         <img src="${phone.image}" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title">Phone Name: ${phone.phone_name}</h5>
-                                <p class="card-text">Phone Brand: ${phone.brand}</p>
+                                <h5 class="card-title">Name: ${phone.phone_name}</h5>
+                                <p class="card-text">Brand: ${phone.brand}</p>
                                 <a href="#top"><button onclick="getPhone('${phone.slug}')" type="button" class="btn btn-primary">Show Details</button></a>
                                 
                             </div>
@@ -97,8 +97,8 @@ const showPhones = phones => {
                         <div class="card" style="width: 18rem;">
                             <img src="${phone.image}" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">Phone Name: ${phone.phone_name}</h5>
-                                    <p class="card-text">Phone Brand: ${phone.brand}</p>
+                                    <h5 class="card-title">Name: ${phone.phone_name}</h5>
+                                    <p class="card-text">Brand: ${phone.brand}</p>
                                     <a href="#top"><button onclick="getPhone('${phone.slug}')" type="button" class="btn btn-primary">Show Details</button></a>
                                     
                                 </div>
@@ -120,8 +120,8 @@ const showPhones = phones => {
                     <div class="card" style="width: 18rem;">
                         <img src="${phone.image}" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title">Phone Name: ${phone.phone_name}</h5>
-                                <p class="card-text">Phone Brand: ${phone.brand}</p>
+                                <h5 class="card-title">Name: ${phone.phone_name}</h5>
+                                <p class="card-text">Brand: ${phone.brand}</p>
                                 <a href="#top"><button onclick="getPhone('${phone.slug}')" type="button" class="btn btn-primary">Show Details</button></a>
                                 
                             </div>
@@ -152,8 +152,8 @@ const showPhoneDetils = phone => {
         <div class="card m-2" style="width: 100%;">
             <img src="${phone.image}" class="card-img-top w-100 mx-auto" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Phone Name : ${phone.name}</h5>
-                    <p class="card-text">Phone Brand : ${phone.brand}</p>
+                    <h5 class="card-title">Name : ${phone.name}</h5>
+                    <p class="card-text">Brand : ${phone.brand}</p>
                     <p class="card-text">Features : </p>
                     <p class="card-text">Phone chipSet : ${phone.mainFeatures.chipSet}</p>
                     <p class="card-text">Phone displaySize : ${phone.mainFeatures.displaySize}</p>
@@ -181,8 +181,8 @@ const showPhoneDetils = phone => {
     <div class="card m-2" style="width: 100%;">
             <img src="${phone.image}" class="card-img-top w-100 mx-auto" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Phone Name : ${phone.name}</h5>
-                <p class="card-text">Phone Brand : ${phone.brand}</p>
+                <h5 class="card-title">Name : ${phone.name}</h5>
+                <p class="card-text">Brand : ${phone.brand}</p>
                 <p class="card-text">Features : </p>
                 <p class="card-text">Phone chipSet : ${phone.mainFeatures.chipSet}</p>
                 <p class="card-text">Phone displaySize : ${phone.mainFeatures.displaySize}</p>
