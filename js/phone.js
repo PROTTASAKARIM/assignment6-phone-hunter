@@ -9,6 +9,9 @@ const toggleSpinner = displayStyle => {
 const noPhoneFound = displayStyle => {
     document.getElementById('no-phone-found').style.display = displayStyle;
 }
+const showAllbutton = displayStyle => {
+    document.getElementById('display-all').style.display = displayStyle;
+}
 
 const searchPhone = () => {
     const searchField = document.getElementById('search-field');
@@ -19,6 +22,7 @@ const searchPhone = () => {
     if (searchText == '') {
         noPhoneFound('block');
         toggleSpinner('none');
+        showAllbutton('none');
         const searchResultShow = document.getElementById('search-result');
         searchResultShow.textContent = '';
         const phoneDetails = document.getElementById('show-phone-details');
@@ -135,7 +139,7 @@ const showPhoneDetils = phone => {
                     <p class="card-text">Phone chipSet : ${phone.mainFeatures.chipSet}</p>
                     <p class="card-text">Phone displaySize : ${phone.mainFeatures.displaySize}</p>
                     <p class="card-text">Phone memory : ${phone.mainFeatures.memory}</p>
-                    <p class="card-text">Phone sensors : ${phone.mainFeatures.sensors}</p>
+                    <p class="card-text">Phone sensors :  ${phone.mainFeatures.sensors ? phone.mainFeatures.sensors : "No data found"}</p>
                     <p class="card-text">Phone storage : ${phone.mainFeatures.storage}</p>
                     <p class="card-text">Others : </p>
                     <p class="card-text">Phone Bluetooth : ${phone.others.Bluetooth}</p>
@@ -163,7 +167,7 @@ const showPhoneDetils = phone => {
                 <p class="card-text">Phone chipSet : ${phone.mainFeatures.chipSet}</p>
                 <p class="card-text">Phone displaySize : ${phone.mainFeatures.displaySize}</p>
                 <p class="card-text">Phone memory : ${phone.mainFeatures.memory}</p>
-                <p class="card-text">Phone sensors : ${phone.mainFeatures.sensors}</p>
+                <p class="card-text">Phone sensors : ${phone.mainFeatures.sensors ? phone.mainFeatures.sensors : "No data found"}</p>
                 <p class="card-text">Phone storage : ${phone.mainFeatures.storage}</p>
                 <p class="card-text">Others : Properties not found</p>
                 <p class="card-text">Phone Release Date : ${phone.releaseDate ? phone.releaseDate : "No release date is found"}</p>
