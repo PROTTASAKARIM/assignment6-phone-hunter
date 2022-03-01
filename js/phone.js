@@ -3,6 +3,7 @@ document.getElementById('loading-spinner').style.display = 'none';
 document.getElementById('display-all').style.display = 'none';
 
 
+
 const toggleSpinner = displayStyle => {
     document.getElementById('loading-spinner').style.display = displayStyle;
 }
@@ -16,9 +17,11 @@ const showAllbutton = displayStyle => {
 const searchPhone = () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
+    const lowerCaseSearchText = searchText.toLowerCase();
     searchField.value = '';
     toggleSpinner('block')
     noPhoneFound('none');
+    document.getElementById('header-name').style.display = 'none';
     if (searchText == '') {
         noPhoneFound('block');
         toggleSpinner('none');
@@ -29,7 +32,7 @@ const searchPhone = () => {
         phoneDetails.textContent = '';
 
     } else {
-        const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+        const url = `https://openapi.programming-hero.com/api/phones?search=${lowerCaseSearchText}`;
         fetch(url)
             .then(res => res.json())
             .then(data => showPhones(data.data))
@@ -131,7 +134,7 @@ const showPhoneDetils = phone => {
         const div = document.createElement('div');
         div.innerHTML = `
         <div class="card m-2" style="width: 100%;">
-            <img src="${phone.image}" class="card-img-top w-75 mx-auto" alt="...">
+            <img src="${phone.image}" class="card-img-top w-100 mx-auto" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Phone Name : ${phone.name}</h5>
                     <p class="card-text">Phone Brand : ${phone.brand}</p>
@@ -159,7 +162,7 @@ const showPhoneDetils = phone => {
         const div = document.createElement('div');
         div.innerHTML = `
     <div class="card m-2" style="width: 100%;">
-        <img src="${phone.image}" class="card-img-top w-75 mx-auto" alt="...">
+            <img src="${phone.image}" class="card-img-top w-100 mx-auto" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Phone Name : ${phone.name}</h5>
                 <p class="card-text">Phone Brand : ${phone.brand}</p>
